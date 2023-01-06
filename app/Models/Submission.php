@@ -12,4 +12,9 @@ class Submission extends Model
     protected $primaryKey = 'id';
     protected $timestamp = true;
     protected $guarded = [];
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User', 'submitted_by', 'id');
+    }
 }
