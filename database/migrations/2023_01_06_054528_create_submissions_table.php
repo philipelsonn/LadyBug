@@ -16,6 +16,7 @@ class CreateSubmissionsTable extends Migration
         Schema::create('submissions', function (Blueprint $table) {
             $table->id();
             $table->string('type');
+            $table->unsignedBigInteger('topic_id')->references('id')->on('topics')->onUpdate('cascade')->onDelete('cascade');
             $table->longText('description');
             $table->string('image');
             $table->unsignedBigInteger('submitted_by')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
