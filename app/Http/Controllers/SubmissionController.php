@@ -5,14 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Submission;
 use App\Models\Topic;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 class SubmissionController extends Controller
 {
     public function index()
     {
+        $type = "STAFF";
+
         return view('submissions.index', [
             'submissions' => Submission::all(),
+            'staffs' => User::where('type', $type)->get(),
         ]);
     }
 

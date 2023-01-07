@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\SubmissionController;
+use App\Http\Controllers\TicketController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,3 +31,6 @@ Route::resource('topics',TopicController::class)->except('show');
 
 //Submission
 Route::resource('submissions',SubmissionController::class)->except('show');
+
+//Ticket
+Route::resource('tickets',TicketController::class);

@@ -17,7 +17,7 @@ class CreateTicketsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('submission_id')->references('id')->on('submissions')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedBigInteger('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('status');
+            $table->string('status')->default('Pending');
             $table->string('priority');
             $table->timestamps();
         });
