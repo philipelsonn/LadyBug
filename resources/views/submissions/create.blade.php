@@ -192,6 +192,14 @@
                         </div>
 
                         <div class="form-group row mb-0 mb-sm-3">
+                            <label for="title" class="col-sm-3 col-form-label text-sm-left">
+                                Title</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="title" name="title" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-0 mb-sm-3">
                             <label for="description" class="col-sm-3 col-form-label text-sm-left">
                                 Description</label>
                             <div class="col-sm-9">
