@@ -114,7 +114,7 @@
   
   textarea.form-control {
     height: 100%;
-    width: 200%;
+    width: 100%;
   }
   
   .container {
