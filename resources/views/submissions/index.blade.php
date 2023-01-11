@@ -17,7 +17,7 @@
                     <th class="align-middle text-center">ID</th>
                     <th class="align-middle text-center">Type</th>
                     <th class="align-middle text-center">Topic</th>
-                    <th class="align-middle text-center">Title</th>
+                    <th class="align-middle text-center">Description</th>
                     <th class="align-middle text-center">Submitted by</th>
                     <th scope="col" class="align-middle text-center">Action</th>
                 </thead>
@@ -27,7 +27,7 @@
                             <td class="align-middle text-center">{{ $submission->id }}</td>
                             <td class="align-middle text-center">{{ $submission->type }}</td>
                             <td class="align-middle text-center">{{ $submission->topic }}</td>
-                            <td class="align-middle text-center">{{ $submission->title }}</td>
+                            <td class="align-middle text-center">{{ $submission->description }}</td>
                             <td class="align-middle text-center">{{ $submission->user->name}}</td>
                             <td class="align-middle text-center d-flex justify-content-center">
                                 <a class="btn btn-sm btn-block btn-info text-white"
@@ -55,7 +55,6 @@
         </div>
     </div>  
 </div> 
-
 {{-- Assign Ticket Modal --}}
 @foreach ($submissions as $submission)
 <div class="modal fade" id="assign{{$submission->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
