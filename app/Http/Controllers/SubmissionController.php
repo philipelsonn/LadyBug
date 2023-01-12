@@ -32,7 +32,6 @@ class SubmissionController extends Controller
         $request->validate([
             'type' => 'required|string',
             'topic' => 'required|string',
-            'title' => 'required|string',
             'description' => 'required|string',
             'image' => 'image|required|mimes:jpg,png,jpeg',
         ]);
@@ -46,7 +45,6 @@ class SubmissionController extends Controller
         Submission::create([
             'type' => $request->type,
             'topic' => $request->topic,
-            'title' => $request->title,
             'description' => $request->description,
             'image' => $file_name,
             'submitted_by' => auth()->user()->id,
@@ -68,7 +66,6 @@ class SubmissionController extends Controller
         $request->validate([
             'type' => 'required|string',
             'topic' => 'required|string',
-            'title' => 'required|string',
             'description' => 'required|string',
             'image_new' => 'image|nullable|mimes:jpg,png,jpeg',
         ]);
@@ -84,7 +81,6 @@ class SubmissionController extends Controller
         $submission->update([
             'type' => $request->type,
             'topic' => $request->topic,
-            'title' => $request->title,
             'description' => $request->description,
             'image' => $file_name,
         ]);

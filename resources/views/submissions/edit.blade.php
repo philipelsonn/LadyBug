@@ -114,7 +114,7 @@
   
   textarea.form-control {
     height: 100%;
-    width: 200%;
+    width: 100%;
   }
   
   .container {
@@ -188,13 +188,6 @@
                                     </option>
                                     @endforeach
                                 </select>
-                            </div>
-                        </div>
-                        <div class="form-group row mb-0 mb-sm-3">
-                            <label for="title" class="col-sm-3 col-form-label text-sm-left">
-                                Title</label>
-                            <div class="col-sm-9">
-                                <input type="text" id="title" name="title" class="form-control" value="{{ $submission->title }}" required>
                             </div>
                         </div>
                         <div class="form-group row mb-0 mb-sm-3">
