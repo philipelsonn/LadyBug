@@ -36,7 +36,9 @@ Route::resource('topics',TopicController::class)->except('show');
 Route::resource('submissions',SubmissionController::class)->except('show');
 
 //Ticket
-Route::resource('tickets',TicketController::class);
+Route::post('/assign-ticket/{id?}', [TicketController::class, 'store'])->name('tickets.store');
+Route::put('/update-ticket-status/{id?}', [TicketController::class, 'updateStatus'])->name('tickets.status-update');
+Route::resource('tickets',TicketController::class)->except('show', 'store');
 
 //Dashboard
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

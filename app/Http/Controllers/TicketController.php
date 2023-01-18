@@ -15,7 +15,7 @@ class TicketController extends Controller
         $id = auth()->user()->id;
         
         return view('tickets.index', [
-            'tickets' => Ticket::where('id', $id)->get(),
+            'tickets' => Ticket::where('user_id', $id)->get(),
         ]);
     }
 
@@ -41,6 +41,21 @@ class TicketController extends Controller
             'submission_id' => $submission->id,
             'user_id' => $request->user_id,
             'priority' => $request->priority,
+        ]);
+
+        return redirect()->route('tickets.index');
+    }
+
+     public function updateStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|string',
+        ]);
+
+        $ticket = Ticket::where('id', $id)->get()->first();
+
+        $ticket->update([
+            'status' => $request->status,
         ]);
 
         return redirect()->route('tickets.index');
