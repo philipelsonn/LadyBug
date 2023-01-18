@@ -12,8 +12,10 @@ class TicketController extends Controller
 {
     public function index()
     {
+        $id = auth()->user()->id;
+        
         return view('tickets.index', [
-            'tickets' => Ticket::all(),
+            'tickets' => Ticket::where('id', $id)->get(),
         ]);
     }
 
