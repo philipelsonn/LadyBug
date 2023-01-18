@@ -23,22 +23,22 @@
                 <tbody>
                     @foreach ($tickets as $ticket)
                         <tr>
-                            <td class="align-middle text-center">{{ $submission->id }}</td>
-                            <td class="align-middle text-center">{{ $submission->type }}</td>
-                            <td class="align-middle text-center">{{ $submission->topic }}</td>
-                            <td class="align-middle text-center">{{ $submission->title }}</td>
-                            <td class="align-middle text-center">{{ $submission->user->name}}</td>
+                            <td class="align-middle text-center">{{ $ticket->id }}</td>
+                            <td class="align-middle text-center">{{ $ticket->submission->type }}</td>
+                            <td class="align-middle text-center">{{ $ticket->submission->topic }}</td>
+                            <td class="align-middle text-center">{{ $ticket->submission->title }}</td>
+                            <td class="align-middle text-center">{{ $ticket->submission->user->name}}</td>
                             <td class="align-middle text-center d-flex justify-content-center">
                                 <a class="btn btn-sm btn-block btn-info text-white"
-                                    target="_blank" href="/storage/images/submissions/{{ $submission->image }}"
+                                    target="_blank" href="/storage/images/submissions/{{ $ticket->submission->image }}"
                                     style="margin-inline: 0.4vw">Screenshot</a>
                                 <button type="button" class="btn btn-sm btn-block btn-primary text-white" style="margin-inline: 0.4vw"
-                                data-bs-toggle="modal" data-bs-target="#assign{{$submission->id}}">
-                                    Assign
+                                data-bs-toggle="modal" data-bs-target="#assign{{$ticket->id}}">
+                                    Update Status
                                 </button>
-                                <a class="btn btn-sm btn-block btn-warning text-white"
-                                    href="{{ route('submissions.edit', $submission->id) }}"
-                                    style="margin-inline: 0.4vw">Edit</a>
+                                {{-- <a class="btn btn-sm btn-block btn-warning text-white"
+                                    href="{{ route('submissions.edit', $ticket->id) }}"
+                                    style="margin-inline: 0.4vw">Edit</a> --}}
                             </td>
                         </tr>
                     @endforeach
@@ -54,12 +54,13 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Assign Ticket</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Update Ticket Status</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form method="POST" action="" enctype="multipart/form-data">
+            <form method="POST" action="{{route('tickets.status-update', $ticket->id)}}" enctype="multipart/form-data">
                 @csrf
+                @method('UPDATE')
                 <div class="row">
                     <div class="col-12 col-md-12">
                         <div class="form-group row mb-0 mb-sm-3">
@@ -68,18 +69,18 @@
                             <div class="col-sm-9">
                                 <select name="status" id="status" class="form-select rounded-pill"
                                     placeholder="">
-                                    <option value="" selected disabled>Choose...
+                                    <option value="" disabled>Choose...
                                     </option>
-                                    <option value="Pending">
+                                    <option value="Pending" @if ($ticket->status == "Pending") selected @endif>
                                         Pending
                                     </option>
-                                    <option value="In Progress">
+                                    <option value="In Progress" @if ($ticket->status == "In Progress") selected @endif>
                                         In Progress
                                     </option>
-                                    <option value="In Review">
+                                    <option value="In Review" @if ($ticket->status == "In Review") selected @endif>
                                         In Review
                                     </option>
-                                    <option value="Resolved">
+                                    <option value="Resolved" @if ($ticket->status == "Resolved") selected @endif>
                                         Resolved
                                     </option>
                                 </select>
@@ -88,6 +89,7 @@
 
                         <div class="form-group row mt-5">
                             <div class="d-grid gap-2">
+                                @method('PUT')
                                 <button type="submit" class="btn btn-outline-1 rounded-20">Submit</button>
                             </div>
                         </div>

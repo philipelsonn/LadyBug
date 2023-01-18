@@ -20,6 +20,6 @@ class Ticket extends Model
 
     public function submission()
     {
-        return $this->hasOne('App\Models\User', 'id', 'submission_id');
+        return $this->hasOne('App\Models\Submission', 'id', 'submission_id');
     }
 }
