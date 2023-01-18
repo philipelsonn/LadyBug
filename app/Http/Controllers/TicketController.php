@@ -48,7 +48,7 @@ class TicketController extends Controller
             'priority' => $request->priority,
         ]);
         
-        $staff = User::where('user_id', $id)->get()->first();
+        $staff = User::where('user_id', $request->user_id)->get()->first();
         $mail = $staff->email;
 
         Mail::to($mail)->send(new NotifyStaff());
