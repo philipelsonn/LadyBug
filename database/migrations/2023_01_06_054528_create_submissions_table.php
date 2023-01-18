@@ -17,6 +17,7 @@ class CreateSubmissionsTable extends Migration
             $table->id();
             $table->string('type');
             $table->string('topic');
+            $table->string('title');
             $table->longText('description');
             $table->string('image');
             $table->unsignedBigInteger('submitted_by')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
