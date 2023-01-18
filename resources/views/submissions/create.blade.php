@@ -3,7 +3,7 @@
 @section('title', 'LadyBug | Create Submission')
 
 @section('content')
-<style>
+{{-- <style>
   body {
     font-family: "Open Sans", sans-serif;
   }
@@ -143,7 +143,7 @@
     background: #fff;
     color: #1e90ff;
   }
-</style>
+</style> --}}
 
 <div class="container mt-5 py-5">
     <div class=" card card-shadow border-0 rounded-20 ">
@@ -189,6 +189,14 @@
                                     @endforeach
                                 </select>
                             </div>
+                        </div>
+
+                        <div class="form-group row mb-0 mb-sm-3">
+                          <label for="title" class="col-sm-3 col-form-label text-sm-left">
+                              Title</label>
+                          <div class="col-sm-9">
+                              <input type="text" id="title" name="title" class="form-control rounded-pill" required>
+                          </div>
                         </div>
 
                         <div class="form-group row mb-0 mb-sm-3">
