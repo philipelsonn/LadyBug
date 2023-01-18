@@ -21,7 +21,7 @@
                     @php($i = 1)
                     @foreach ($submissions as $submission)
                         <tr class="">
-                            <td class="align-middle fw-bold">{{ $i }}</td>
+                            <td class="align-middle fw-bold">{{ $submission->id }}</td>
                             <td class="align-middle">
                                 {{ $submission->type }}
                             </td>

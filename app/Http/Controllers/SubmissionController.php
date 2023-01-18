@@ -76,7 +76,7 @@ class SubmissionController extends Controller
         if ($request->hasFile('image_new')) {
             $extension = $request->file('image_new')->getClientOriginalExtension();
             $file_name = auth()->user()->id . time() . '.' . $extension;
-            $path = $request->file('image')->storeAs('public/images/submissions', $file_name);
+            $path = $request->file('image_new')->storeAs('public/images/submissions', $file_name);
         } else {
             $file_name = request('image_old');
         }
