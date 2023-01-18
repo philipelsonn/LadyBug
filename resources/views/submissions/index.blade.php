@@ -55,69 +55,62 @@
         </div>
     </div>
 
-{{-- Assign Ticket Modal --}}
-@foreach ($submissions as $submission)
-<div class="modal fade" id="assign{{$submission->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Assign Ticket</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <form method="POST" action="{{route('tickets.store', $submission->id)}}" enctype="multipart/form-data">
-                @csrf
-                <div class="row">
-                    <div class="col-12 col-md-12">
-                        <div class="form-group row mb-0 mb-sm-3">
-                            <label for="priority" class="col-sm-3 col-form-label text-sm-left">
-                                Priority</label>
-                            <div class="col-sm-9">
-                                <select name="priority" id="priority" class="form-select rounded-pill"
-                                    placeholder="">
-                                    <option value="" selected disabled>Choose...
-                                    </option>
-                                    <option value="LOW">
-                                        Low
-                                    </option>
-                                    <option value="MEDIUM">
-                                        Medium
-                                    </option>
-                                    <option value="High">
-                                        High
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0 mb-sm-3">
-                            <label for="user_id" class="col-sm-3 col-form-label text-sm-left">
-                                Staff</label>
-                            <div class="col-sm-9">
-                                <select name="user_id" id="user_id" class="form-select rounded-pill"
-                                    placeholder="" >
-                                    <option value="" selected disabled>Choose...
-                                    </option>
-                                    @foreach ($staffs as $staff)
-                                    <option value="{{$staff->id}}">
-                                        {{$staff->name}}
-                                    </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mt-5">
-                            <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-outline-1 rounded-20">Submit</button>
-                            </div>
-                        </div>
+    {{-- Assign Ticket Modal --}}
+    @foreach ($submissions as $submission)
+        <div class="modal" id="assign{{$submission->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Assign Ticket</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+                    <form action="{{route('tickets.store', $submission->id)}}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('UPDATE')
+                        <div class="modal-body">
+                            <p class="fw-bold my-auto text-center mb-3">{{ $submission->description }}</p>
+                            <div class="d-flex justify-content-evenly mb-2">
+                                <p class="my-auto">Priority</p>
+                                <div class="col-md-8">
+                                    <select name="status" id="status" class="form-select rounded-pill"
+                                        placeholder="">
+                                        <option value="" disabled>Choose...
+                                        </option>
+                                        <option value="Low">
+                                            Low
+                                        </option>
+                                        <option value="Medium">
+                                            Medium
+                                        </option>
+                                        <option value="High">
+                                            High
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-evenly mb-2">
+                                <p class="my-auto me-3">Staff</p>
+                                <div class="col-md-8">
+                                    <select name="status" id="status" class="form-select rounded-pill"
+                                        placeholder="">
+                                        <option value="" disabled>Choose...
+                                        </option>
+                                        @foreach ($staffs as $staff)
+                                            <option value="{{ $staff->name }}">
+                                                {{ $staff->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            @method('PUT')
+                            <button type="submit" class="btn btn-warning fw-bold">Assign Tickets</button>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
-      </div>
-    </div>
-</div>
-@endforeach
+    @endforeach
 @endsection
