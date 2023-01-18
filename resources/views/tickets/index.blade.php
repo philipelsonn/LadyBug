@@ -3,50 +3,62 @@
 @section('title', 'LadyBug | Manage Tickets')
 
 @section('content')
-<div class="container mt-5 py-5">
-    <div class=" card card-shadow border-0 rounded-20 ">
-        <div class="card-body my-3">
-            <div class="title-line"></div> 
-            <h5 class="subheading-text mt-3">Tickets</h5>
-            <h3 class="fw-bold my-3 c-text-1">Ticket List</h3>  
-            <hr>
-            <div class="table-responsive py-3">
-                <table id="myTable" class="table table-bordered table-sm table-striped no-footer">
-                <thead class="thead-light">
-                    <th class="align-middle text-center">ID</th>
-                    <th class="align-middle text-center">Type</th>
-                    <th class="align-middle text-center">Topic</th>
-                    <th class="align-middle text-center">Title</th>
-                    <th class="align-middle text-center">Submitted by</th>
-                    <th scope="col" class="align-middle text-center">Action</th>
+    <h2 class="fw-bold text-center mt-4">Tickets</h2>
+    <div class="container mt-4">
+        <div class="card p-4 bg-light">
+            <table id="myTable" class="table table-striped bg-light">
+                <thead>
+                    <tr class="">
+                        <th class="col-md-1 align-middle">ID</th>
+                        <th class="col-md-1 align-middle">Type</th>
+                        <th class="col-md-2 align-middle">Topic</th>
+                        <th class="col-md-3 align-middle">Title</th>
+                        <th class="col-md-2 align-middle">Submitted By</th>
+                        <th class="col-md-1 align-middle">Priority</th>
+                        <th class="col-md-2 align-middle">Action</th>
+                    </tr>
                 </thead>
                 <tbody>
+                    @php($i = 1)
                     @foreach ($tickets as $ticket)
-                        <tr>
-                            <td class="align-middle text-center">{{ $ticket->id }}</td>
-                            <td class="align-middle text-center">{{ $ticket->submission->type }}</td>
-                            <td class="align-middle text-center">{{ $ticket->submission->topic }}</td>
-                            <td class="align-middle text-center">{{ $ticket->submission->title }}</td>
-                            <td class="align-middle text-center">{{ $ticket->submission->user->name}}</td>
-                            <td class="align-middle text-center d-flex justify-content-center">
-                                <a class="btn btn-sm btn-block btn-info text-white"
-                                    target="_blank" href="/storage/images/submissions/{{ $ticket->submission->image }}"
-                                    style="margin-inline: 0.4vw">Screenshot</a>
-                                <button type="button" class="btn btn-sm btn-block btn-primary text-white" style="margin-inline: 0.4vw"
-                                data-bs-toggle="modal" data-bs-target="#assign{{$ticket->id}}">
-                                    Update Status
-                                </button>
-                                {{-- <a class="btn btn-sm btn-block btn-warning text-white"
-                                    href="{{ route('submissions.edit', $ticket->id) }}"
-                                    style="margin-inline: 0.4vw">Edit</a> --}}
+                        <tr class="">
+                            <td class="align-middle fw-bold">{{ $ticket->id }}</td>
+                            <td class="align-middle">
+                                {{ $ticket->submission->type }}
+                            </td>
+                            <td class="align-middle">
+                                {{ $ticket->submission->topic }}
+                            </td>
+                            <td class="align-middle">{{ $ticket->submission->title }}</td>
+                            <td class="align-middle">{{ $ticket->submission->user->name }}</td>
+                            <td class="align-middle @if ($ticket->priority == 'LOW')
+                                bg-info
+                                @elseif ($ticket->priority == 'MEDIUM')
+                                bg-warning
+                                @elseif ($ticket->priority == 'HIGH')
+                                bg-danger
+                                @else
+                                bg-success
+                            @endif">{{ $ticket->priority }}</td>
+                            <td class="align-middle">
+                                <div class="d-flex justify-content-center">
+                                    <a class="btn btn-sm btn-warning text-dark fw-bold me-2" data-bs-toggle="modal" data-bs-target="#assign{{$ticket->id}}">Update Status</a>
+                                    <form action="{{ route('submissions.destroy', $ticket->id) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="btn btn-sm btn-block btn-danger text-white fw-bold"
+                                        onclick="return confirm('Are you sure you want to permanently delete the data?')">
+                                        DELETE</button>
+                                    </form>
+                                </div>
+                            </td>
                             </td>
                         </tr>
+                        @php($i = $i + 1)
                     @endforeach
                 </tbody>
             </table>
         </div>
-    </div>  
-</div> 
+    </div>
 
 {{-- Update Ticket Status Modal --}}
 @foreach ($tickets as $ticket)
