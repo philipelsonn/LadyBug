@@ -30,10 +30,22 @@ class UserSeeder extends Seeder
             ],
             [
                 'type' => "STAFF",
-                'name' => "Staff",
-                'email' => "staff@gmail.com",
+                'name' => "Staff1",
+                'email' => "staff1@gmail.com",
                 'password' => Hash::make('password'),
             ],
+            [
+                'type' => "STAFF",
+                'name' => "Staff2",
+                'email' => "staff2@gmail.com",
+                'password' => Hash::make('password'),
+            ],
+            [
+                'type' => "STAFF",
+                'name' => "Staff3",
+                'email' => "staff3@gmail.com",
+                'password' => Hash::make('password'),
+            ]
         ]);
     }
 }
