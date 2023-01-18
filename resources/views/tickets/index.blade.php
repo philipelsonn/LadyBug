@@ -11,8 +11,8 @@
             <h3 class="fw-bold my-3 c-text-1">Ticket List</h3>  
             <hr>
             <div class="table-responsive py-3">
-                <table class="table table-bordered table-sm table-striped no-footer">
-                    <thead class="thead-light">
+                <table id="myTable" class="table table-bordered table-sm table-striped no-footer">
+                <thead class="thead-light">
                     <th class="align-middle text-center">ID</th>
                     <th class="align-middle text-center">Type</th>
                     <th class="align-middle text-center">Topic</th>
