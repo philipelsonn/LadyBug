@@ -11,7 +11,7 @@ class AuthController extends Controller
 {
 
     public function index(){
-        redirect()->route('auth.login');
+        return redirect()->route('auth.login');
     }
 
     public function login(){
@@ -50,6 +50,16 @@ class AuthController extends Controller
         User::create($validatedData);
 
         return redirect()->route('auth.login')->with('success', 'Registration Success! Please Login!');
+    }
+
+    public function logout(){
+        Auth::logout();
+
+        request()->session()->invalidate();
+
+        request()->session()->regenerateToken();
+
+        return redirect()->route('auth.login');
     }
 
 }
