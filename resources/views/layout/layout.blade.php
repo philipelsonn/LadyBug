@@ -14,7 +14,7 @@
         <nav class="navbar navbar-expand-lg bg-light">
             <div class="container-fluid">
                 <a href="" class="d-flex text-decoration-none">
-                    <img src="./assets/image/logo.png" alt="" class="m-2" style="width: 50px; height: 50px">
+                    <img src="/assets/image/logo.png" alt="" class="m-2" style="width: 50px; height: 50px">
                     <h4 class="ms-2 my-auto text-info fw-bold">LADYBUG</h4>
                 </a>
                 <div class="d-flex justify-content-end" id="navbarSupportedContent">
@@ -22,19 +22,18 @@
                         <li class="nav-item my-auto me-2">
                             <a class="nav-link active" aria-current="page" href="{{ route('dashboard') }}">Home</a>
                         </li>
-                        @if (auth()->user()->type == 'USER')
-
-                        @elseif (auth()->user()->type == 'STAFF')
-                            <li class="nav-item my-auto">
-                                <a class="nav-link active" aria-current="page" href="">Ticket</a>
+                        @if (auth()->user()->type == 'ADMIN')
+                            <li class="nav-item my-auto me-2">
+                                <a class="nav-link active" aria-current="page" href="{{ route('management.index') }}">Manage Users</a>
                             </li>
-                        @else
-
                         @endif
-                        <li class="nav-item dropdown mt-1 ms-5">
-                            <a class="nav-link dropdown-toggle text-dark" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ $user->name  }}
-                                <img src="{{ $user->image }}" alt="" class="rounded-circle" style="width: 60px; height: 60px">
+                        <li class="nav-item my-auto">
+                            <a class="nav-link active" aria-current="page" href="">Tickets</a>
+                        </li>
+                        <li class="nav-item dropdown mt-1 ms-2 border border-secondary border-top-0 border-end-0 border-bottom-0">
+                            <a class="nav-link dropdown-toggle text-dark ms-2 fw-bold" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ auth()->user()->name }}
+                                <img src="{{ auth()->user()->image }}" alt="" class="rounded-circle ms-2" style="width: 40px; height: 40px">
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="">Edit Profile</a></li>

@@ -4,22 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
     public function index(){
-        $userId = auth()->user()->id;
-        $user = User::find($userId);
-        $data = [
-            'user' => $user
-        ];
-
         if (auth()->user()->type == 'USER'){
-            return view('dashboards.user', $data);
+            return view('dashboards.user');
         } else if (auth()->user()->type == 'STAFF'){
-            return view('dashboards.staff', $data);
+            return view('dashboards.staff');
         } else{
-            return view('dashboards.admin', $data);
+            return view('dashboards.admin');
         }
     }
 }
