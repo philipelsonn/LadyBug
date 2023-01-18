@@ -3,7 +3,7 @@
 @section('title', 'LadyBug | Register')
 
 @section('content')
-    <div class="card d-flex align-items-stretch w-75 mx-auto my-auto bg-light bg-opacity-50">
+    <div class="card d-flex align-items-stretch w-75 mx-auto my-auto bg-success bg-opacity-10">
         <div class="row g-0">
             <div class="col-md-7">
                 <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" class="img-fluid rounded-start" alt="...">

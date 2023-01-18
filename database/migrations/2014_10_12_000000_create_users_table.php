@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('image')->default('https://o.remove.bg/downloads/21b1e978-ff5c-4880-bd55-dfe7d5a1e62a/image-removebg-preview.png');
             $table->rememberToken();
             $table->timestamps();
         });
