@@ -13,6 +13,17 @@
                 <label for="email">User ID</label>
             </div>
             <div class="col-md-8 form-floating mx-auto mt-3">
+                <input type="text" id="name" name="name" class="form-control form-control @error('name')
+                    is-invalid
+                @enderror" placeholder="Name" value="{{ $user->name }}" required>
+                <label for="name">Name</label>
+                @error('name')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
+            <div class="col-md-8 form-floating mx-auto mt-3">
                 <input type="email" id="email" name="email" class="form-control form-control @error('email')
                     is-invalid
                 @enderror" placeholder="Email Address" value="{{ $user->email }}" required>

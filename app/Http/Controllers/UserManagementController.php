@@ -28,11 +28,11 @@ class UserManagementController extends Controller
     }
 
     public function updateUser(Request $request, int $id){
-        $validatedData = $request->validate([
+        $request->validate([
             'name' => 'required|min:3',
             'email' => 'required|email:rfc,dns',
             'password' => 'min:6|required_with:confirmPassword|same:confirmPassword',
-            'confirmPassword' => 'min:6'
+            'confirmPassword' => 'min:6',
         ]);
 
         $user = User::where('id', $id)->first();
@@ -40,7 +40,7 @@ class UserManagementController extends Controller
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
         ]);
 
         return redirect()->route('management.index');
