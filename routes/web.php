@@ -3,9 +3,11 @@
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\SubmissionController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\UserManagementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +27,7 @@ Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
 Route::post('/login', [AuthController::class, 'loginAuth']);
 Route::get('/register', [AuthController::class, 'register'])->name('auth.register');
 Route::post('/register', [AuthController::class, 'registerAuth']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
 //Topic
 Route::resource('topics',TopicController::class)->except('show');
@@ -34,3 +37,12 @@ Route::resource('submissions',SubmissionController::class)->except('show');
 
 //Ticket
 Route::resource('tickets',TicketController::class);
+
+//Dashboard
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+//User Management
+Route::get('/manageUser', [UserManagementController::class, 'manageUser'])->name('management.index');
+Route::get('/updateUser/{id?}', [UserManagementController::class, 'viewUpdate']);
+Route::put('/updateUser/{id?}', [UserManagementController::class, 'updateUser']);
+Route::post('/deleteUser/{id?}', [UserManagementController::class, 'deleteUser']);
