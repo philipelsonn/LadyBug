@@ -56,6 +56,12 @@
         $(document).ready( function () {
             $('#myTable').DataTable();
         } );
+        $(document).ready( function () {
+            $('#myTable2').DataTable();
+        } );
+        $(document).ready( function () {
+            $('#myTable3').DataTable();
+        } );
     </script>
 </body>
 @auth

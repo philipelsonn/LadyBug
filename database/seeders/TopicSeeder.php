@@ -27,6 +27,9 @@ class TopicSeeder extends Seeder
             [
                 'title' => "Payment",
             ],
+            [
+                'title' => "Transaction",
+            ],
         ]);
     }
 }

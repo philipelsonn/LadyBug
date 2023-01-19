@@ -29,10 +29,10 @@
                                 {{ $submission->topic }}
                             </td>
                             <td class="align-middle">{{ $submission->title }}</td>
-                            <td class="align-middle">{{ $submission->submitted_by }}</td>
+                            <td class="align-middle">{{ $submission->user->name }}</td>
                             <td class="align-middle">
                                 <div class="d-flex justify-content-center">
-                                    <a class="btn btn-sm btn-info text-dark fw-bold me-2" href="/storage/images/submissions/{{ $submission->image }}">Screenshot</a>
+                                    <a class="btn btn-sm btn-info text-dark fw-bold me-2" target="_blank" href="/storage/images/submissions/{{ $submission->image }}">Screenshot</a>
                                     @if (auth()->user()->type == 'USER')
                                         <a class="btn btn-sm btn-warning text-dark fw-bold me-2" href="{{ route('submissions.edit', $submission->id) }}">Edit</a>
                                     @else
