@@ -3,9 +3,9 @@
 @section('title', 'LadyBug | Manage Tickets')
 
 @section('content')
-    <h2 class="fw-bold text-center mt-4">Tickets</h2>
-    <div class="container mt-4">
-        <div class="card p-4 bg-light">
+    <div class="container my-auto">
+        <div class="card p-4 bg-light mt-3 mb-3">
+            <h2 class="fw-bold text-center mt-2 mb-4">Tickets</h2>
             <table id="myTable" class="table table-striped bg-light">
                 <thead>
                     <tr class="">
@@ -60,57 +60,50 @@
         </div>
     </div>
 
-{{-- Update Ticket Status Modal --}}
-@foreach ($tickets as $ticket)
-<div class="modal fade" id="assign{{$ticket->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Update Ticket Status</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <form method="POST" action="{{route('tickets.status-update', $ticket->id)}}" enctype="multipart/form-data">
-                @csrf
-                @method('UPDATE')
-                <div class="row">
-                    <div class="col-12 col-md-12">
-                        <div class="form-group row mb-0 mb-sm-3">
-                            <label for="status" class="col-sm-3 col-form-label text-sm-left">
-                                Status</label>
-                            <div class="col-sm-9">
-                                <select name="status" id="status" class="form-select rounded-pill"
-                                    placeholder="">
-                                    <option value="" disabled>Choose...
-                                    </option>
-                                    <option value="Pending" @if ($ticket->status == "Pending") selected @endif>
-                                        Pending
-                                    </option>
-                                    <option value="In Progress" @if ($ticket->status == "In Progress") selected @endif>
-                                        In Progress
-                                    </option>
-                                    <option value="In Review" @if ($ticket->status == "In Review") selected @endif>
-                                        In Review
-                                    </option>
-                                    <option value="Resolved" @if ($ticket->status == "Resolved") selected @endif>
-                                        Resolved
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mt-5">
-                            <div class="d-grid gap-2">
-                                @method('PUT')
-                                <button type="submit" class="btn btn-outline-1 rounded-20">Submit</button>
-                            </div>
-                        </div>
+    {{-- Update Ticket Status Modal --}}
+    @foreach ($tickets as $ticket)
+        <div class="modal" id="assign{{$ticket->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Update Ticket Status</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+                    <form action="{{route('tickets.status-update', $ticket->id)}}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('UPDATE')
+                        <div class="modal-body">
+                            <p class="fw-bold my-auto text-center mb-3">{{ $ticket->submission->description }}</p>
+                            <div class="d-flex justify-content-evenly mb-2">
+                                <p class="my-auto">Ticket Status</p>
+                                <div class="col-md-8">
+                                    <select name="status" id="status" class="form-select rounded-pill"
+                                        placeholder="">
+                                        <option value="" disabled>Choose...
+                                        </option>
+                                        <option value="Pending" @if ($ticket->status == "Pending") selected @endif>
+                                            Pending
+                                        </option>
+                                        <option value="In Progress" @if ($ticket->status == "In Progress") selected @endif>
+                                            In Progress
+                                        </option>
+                                        <option value="In Review" @if ($ticket->status == "In Review") selected @endif>
+                                            In Review
+                                        </option>
+                                        <option value="Resolved" @if ($ticket->status == "Resolved") selected @endif>
+                                            Resolved
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            @method('PUT')
+                            <button type="submit" class="btn btn-warning fw-bold">Update Status</button>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
-    </div>
-</div>
-</div>
-@endforeach
+    @endforeach
 @endsection

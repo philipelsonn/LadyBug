@@ -3,7 +3,7 @@
 @section('title', 'LadyBug | Edit Submission')
 
 @section('content')
-    <div class="container mt-5">
+    <div class="container my-auto">
         <div class="card bg-light p-4 mt-3">
             <h2 class="fw-bold text-center mt-2">Create Submission</h2>
             <form action="{{route('submissions.update', $submission->id)}}" method="POST" enctype="multipart/form-data" class="mt-4">
