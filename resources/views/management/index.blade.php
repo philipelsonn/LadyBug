@@ -35,6 +35,7 @@
                                     <a class="btn btn-sm btn-warning text-dark fw-bold me-2" href="/updateUser/{{ $user->id }}">UPDATE</a>
                                     <form action="/deleteUser/{{ $user->id }}" method="POST">
                                         @csrf
+                                        @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-block btn-danger text-white fw-bold"
                                         onclick="return confirm('Are you sure you want to permanently delete the data?')">
                                         DELETE</button>

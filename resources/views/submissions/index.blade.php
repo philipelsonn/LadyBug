@@ -40,6 +40,7 @@
                                     @endif
                                     <form action="{{ route('submissions.destroy', $submission->id) }}" method="POST">
                                         @csrf
+                                        @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-block btn-danger text-white fw-bold"
                                         onclick="return confirm('Are you sure you want to permanently delete the data?')">
                                         DELETE</button>
