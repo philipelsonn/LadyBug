@@ -3,43 +3,100 @@
 @section('title', 'LadyBug | Manage Topic')
 
 @section('content')
-<div class="container mt-5 py-5">
-    <div class=" card card-shadow border-0 rounded-20 ">
-        <div class="card-body my-3">
-            <div class="title-line"></div> 
-            <h5 class="subheading-text mt-3">Topics</h5>
-            <h3 class="fw-bold my-3 c-text-1">Topic List</h3>
-            <a class="btn btn-md my-2 rounded-20 btn-outline-1" href="{{ route('topics.create') }}">Add</a>  
-            <hr>
-            <div class="table-responsive py-3">
-                <table class="table table-bordered table-sm table-striped no-footer">
-                    <thead class="thead-light">
-                    <th class="align-middle text-center">ID</th>
-                    <th class="align-middle text-center">Title</th>
-                    <th scope="col" class="align-middle text-center">Action</th>
+    <div class="container my-auto">
+        <div class="card p-4 bg-light mt-3 mb-3">
+            <div class="d-flex justify-content-between mt-2 mb-4">
+                <h2 class="fw-bold">Topics</h2>
+                <a class="btn btn-lg btn-success text-white fw-bold" data-bs-toggle="modal" data-bs-target="#addTopic">Add New Topic</a>
+            </div>
+            <table id="myTable" class="table table-striped bg-light">
+                <thead>
+                    <tr class="">
+                        <th class="col-md-1 align-middle">ID</th>
+                        <th class="col-md-9 align-middle">Title</th>
+                        <th class="col-md-2 align-middle">Action</th>
+                    </tr>
                 </thead>
                 <tbody>
+                    @php($i = 1)
                     @foreach ($topics as $topic)
-                        <tr>
-                            <td class="align-middle text-center">{{ $topic->id }}</td>
-                            <td class="align-middle text-center">{{ $topic->title }}</td>
-                            <td class="align-middle text-center d-flex justify-content-center">
-                                <a class="btn btn-sm btn-block btn-warning text-white"
-                                    href="{{ route('topics.edit', $topic->id) }}"
-                                    style="margin-inline: 0.4vw">Edit</a>
-                                <form method="POST" action="{{ route('topics.destroy', $topic->id) }}">
-                                    @csrf
-                                    <input type="hidden" name="_method" value='DELETE'>
-                                    <button type="submit" class="btn btn-sm btn-block btn-danger text-white"
-                                    onclick="return confirm('Are you sure you want to permanently delete the data?')">
-                                    Delete</button>
-                                </form>
+                        <tr class="">
+                            <td class="align-middle fw-bold">{{ $topic->id }}</td>
+                            <td class="align-middle">
+                                {{ $topic->title }}
+                            </td>
+                            <td class="align-middle">
+                                <div class="d-flex">
+                                    <a class="btn btn-sm btn-warning text-dark fw-bold me-2" data-bs-toggle="modal" data-bs-target="#assign{{$topic->id}}">Update</a>
+                                    <form action="{{ route('topics.destroy', $topic->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-block btn-danger text-white fw-bold"
+                                        onclick="return confirm('Are you sure you want to permanently delete the data?')">
+                                        DELETE</button>
+                                    </form>
+                                </div>
+                            </td>
                             </td>
                         </tr>
+                        @php($i = $i + 1)
                     @endforeach
                 </tbody>
             </table>
         </div>
-    </div>  
-</div> 
+    </div>
+
+    @foreach ($topics as $topic)
+        <div class="modal" id="assign{{$topic->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Update Topic</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="{{ route('topics.update', $topic->id)}}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('UPDATE')
+                        <div class="modal-body">
+                            <div class="d-flex justify-content-evenly mb-2">
+                                <p class="my-auto">Title</p>
+                                <div class="col-md-8">
+                                    <input type="text" id="title" name="title" class="form-control rounded-pill" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            @method('PUT')
+                            <button type="submit" class="btn btn-warning fw-bold">Update Topic</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
+    <div class="modal" id="addTopic" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add New Topic</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{route('topics.store')}}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="d-flex justify-content-evenly mb-2">
+                            <p class="my-auto">Title</p>
+                            <div class="col-md-8">
+                                <input type="text" id="title" name="title" class="form-control rounded-pill" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-warning fw-bold">Update Topic</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
