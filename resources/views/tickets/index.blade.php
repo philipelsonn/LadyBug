@@ -3,7 +3,7 @@
 @section('title', 'LadyBug | Manage Tickets')
 
 @section('content')
-    <h2 class="fw-bold text-center mt-4">Tickets</h2>
+<h2 class="fw-bold text-center mt-4">Tickets</h2>
     <div class="container mt-4">
         <div class="card p-4 bg-light">
             <table id="myTable" class="table table-striped bg-light">
@@ -110,7 +110,6 @@
             </form>
         </div>
     </div>
-</div>
 </div>
 @endforeach
 @endsection
