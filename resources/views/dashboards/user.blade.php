@@ -36,8 +36,6 @@
                             @foreach ($tickets as $ticket)
                                 @if ($ticket->submission_id == $submission->id)
                                     {{$ticket->status}}
-                                @else
-                                    Unread
                                 @endif
                             @endforeach
                         </td>

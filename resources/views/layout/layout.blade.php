@@ -32,7 +32,7 @@
                         <li class="nav-item dropdown mt-1 ms-2 border border-secondary border-top-0 border-end-0 border-bottom-0">
                             <a class="nav-link dropdown-toggle text-dark ms-2 fw-bold" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 {{ auth()->user()->name }}
-                                <img src="{{ auth()->user()->image }}" alt="" class="rounded-circle ms-2" style="width: 40px; height: 40px">
+                                <img src="/storage/images/submissions/{{ auth()->user()->image }}" alt="" class="rounded-circle ms-2" style="width: 40px; height: 40px">
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Edit Profile</a></li>

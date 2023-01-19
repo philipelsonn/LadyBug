@@ -50,49 +50,6 @@
         </div>
     </div>
 
-    <div class="container my-auto">
-        <div class="card p-4 bg-light mt-3 mb-3">
-        <h2 class="fw-bold text-center mt-2 mb-4">Resolved</h2>
-            <table id="myTable2" class="table table-striped bg-light">
-                <thead>
-                    <tr class="">
-                        <th class="col-md-1 align-middle">ID</th>
-                        <th class="col-md-2 align-middle">Type</th>
-                        <th class="col-md-2 align-middle">Topic</th>
-                        <th class="col-md-3 align-middle">Title</th>
-                        <th class="col-md-2 align-middle">Submitted By</th>
-                        <th class="col-md-2 align-middle">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @php($i = 1)
-                    @foreach ($submissions as $submission)
-                    @if ($submission->ticket)
-                        @if ($submission->ticket->status == "Resolved")
-                            <tr class="">
-                                <td class="align-middle fw-bold">{{ $submission->id }}</td>
-                                <td class="align-middle">
-                                    {{ $submission->type }}
-                                </td>
-                                <td class="align-middle">
-                                    {{ $submission->topic }}
-                                </td>
-                                <td class="align-middle">{{ $submission->title }}</td>
-                                <td class="align-middle">{{ $submission->user->name }}</td>
-                                <td class="align-middle">
-                                    <div class="d-flex justify-content-center">
-                                        <a class="btn btn-sm btn-info text-dark fw-bold me-2" target="_blank" href="/storage/images/submissions/{{ $submission->image }}">Screenshot</a>
-                                    </div>
-                                </td>
-                                </td>
-                            </tr>
-                            @php($i = $i + 1)
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-</div>
-
 <h2 class="fw-bold text-center mt-4">Tickets</h2>
 <div class="container mt-4">
     <div class="card p-4 bg-light">
