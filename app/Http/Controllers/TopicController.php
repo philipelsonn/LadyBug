@@ -24,7 +24,7 @@ class TopicController extends Controller
         $request->validate([
             'title' => 'required|string',
         ]);
-        
+
         Topic::create([
             "title" => $request->title,
         ]);
@@ -32,19 +32,19 @@ class TopicController extends Controller
         return redirect()->route("topics.index");
     }
 
-    public function edit(Topic $topic)
-    {
-        return view('topics.edit', [
-            'topic'=>$topic,
-        ]);
-    }
+    // public function edit(Topic $topic)
+    // {
+    //     return view('topics.edit', [
+    //         'topic'=>$topic,
+    //     ]);
+    // }
 
     public function update(Request $request, Topic $topic)
     {
         $request->validate([
             'title'=>'required|string',
         ]);
-        
+
         $topic->update([
             'title'=>$request->title,
         ]);
