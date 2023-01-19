@@ -3,9 +3,12 @@
 @section('title', 'LadyBug | Dashboard')
 
 @section('content')
-<h2 class="fw-bold text-center mt-4"> My Submissions</h2>
-<div class="container mt-4">
-    <div class="card p-4 bg-light">
+<div class="container my-auto">
+    <div class="card p-4 bg-light mt-3 mb-3">
+        <div class="d-flex justify-content-between mb-4">
+            <h2 class="fw-bold"> My Submissions</h2>
+            <a class="btn btn-lg btn-success text-white fw-bold" href="{{ route('submissions.create') }}">Add New Submission</a>
+        </div>
         <table id="myTable" class="table table-striped bg-light">
             <thead>
                 <tr class="">

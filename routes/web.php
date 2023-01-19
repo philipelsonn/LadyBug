@@ -23,9 +23,9 @@ use App\Http\Controllers\UserManagementController;
 Route::get('/', [AuthController::class, 'index']);
 
 //Auth
-Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
+Route::get('/login', [AuthController::class, 'login'])->name('auth.login')->middleware('guest');
 Route::post('/login', [AuthController::class, 'loginAuth']);
-Route::get('/register', [AuthController::class, 'register'])->name('auth.register');
+Route::get('/register', [AuthController::class, 'register'])->name('auth.register')->middleware('guest');
 Route::post('/register', [AuthController::class, 'registerAuth']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
@@ -48,3 +48,7 @@ Route::get('/manageUser', [UserManagementController::class, 'manageUser'])->name
 Route::get('/updateUser/{id?}', [UserManagementController::class, 'viewUpdate']);
 Route::put('/updateUser/{id?}', [UserManagementController::class, 'updateUser']);
 Route::post('/deleteUser/{id?}', [UserManagementController::class, 'deleteUser']);
+
+//Edit Profile
+Route::get('editProfile', [DashboardController::class, 'editProfile'])->name('profile.edit');
+Route::put('/editProfile', [DashboardController::class, 'edit']);
