@@ -52,7 +52,7 @@ class SubmissionController extends Controller
             'submitted_by' => auth()->user()->id,
         ]);
 
-        return redirect()->route('submissions.index');
+        return redirect()->route('dashboard');
     }
 
     public function edit($id)
@@ -89,13 +89,13 @@ class SubmissionController extends Controller
             'image' => $file_name,
         ]);
 
-        return redirect()->route('submissions.index');
+        return redirect()->route('dasboard');
     }
 
     public function destroy(Submission $submission)
     {
         $submission->delete();
 
-        return redirect()->route('submissions.index');
+        return redirect()->route('dasboard');
     }
 }
