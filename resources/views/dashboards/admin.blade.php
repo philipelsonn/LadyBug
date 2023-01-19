@@ -52,7 +52,7 @@
     </div>
 
     <div class="container my-auto">
-        <div class="card p-4 bg-light mt-3 mb-3">
+        <div class="card p-4 bg-light mt-3">
         <h2 class="fw-bold text-center mt-2 mb-4">Resolved</h2>
             <table id="myTable2" class="table table-striped bg-light">
                 <thead>
@@ -88,107 +88,66 @@
                                 </td>
                             </tr>
                             @php($i = $i + 1)
-                @endforeach
-            </tbody>
-        </table>
+                        @endif
+                    @endif
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
 
-<h2 class="fw-bold text-center mt-4">Tickets</h2>
-<div class="container mt-4">
-    <div class="card p-4 bg-light">
-        <table id="myTable" class="table table-striped bg-light">
-            <thead>
-                <tr class="">
-                    <th class="col-md-1 align-middle">ID</th>
-                    <th class="col-md-1 align-middle">Type</th>
-                    <th class="col-md-2 align-middle">Topic</th>
-                    <th class="col-md-3 align-middle">Title</th>
-                    <th class="col-md-2 align-middle">Submitted By</th>
-                    <th class="col-md-1 align-middle">Priority</th>
-                    <th class="col-md-2 align-middle">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @php($i = 1)
-                @foreach ($tickets as $ticket)
+
+    <div class="container my-auto">
+        <div class="card p-4 bg-light mt-3 mb-3">
+            <h2 class="fw-bold text-center mt-2 mb-4">Tickets</h2>
+            <table id="myTable" class="table table-striped bg-light">
+                <thead>
                     <tr class="">
-                        <td class="align-middle fw-bold">{{ $ticket->id }}</td>
-                        <td class="align-middle">
-                            {{ $ticket->submission->type }}
-                        </td>
-                        <td class="align-middle">
-                            {{ $ticket->submission->topic }}
-                        </td>
-                        <td class="align-middle">{{ $ticket->submission->title }}</td>
-                        <td class="align-middle">{{ $ticket->submission->user->name }}</td>
-                        <td class="align-middle @if ($ticket->priority == 'LOW')
-                            bg-info
-                            @elseif ($ticket->priority == 'MEDIUM')
-                            bg-warning
-                            @elseif ($ticket->priority == 'HIGH')
-                            bg-danger
-                            @else
-                            bg-success
-                        @endif">{{ $ticket->priority }}</td>
-                        <td class="align-middle">
-                            <div class="d-flex justify-content-center">
-                                <a class="btn btn-sm btn-warning text-dark fw-bold me-2" data-bs-toggle="modal" data-bs-target="#assign{{$ticket->id}}">Update Status</a>
-                                <form action="{{ route('submissions.destroy', $ticket->id) }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn btn-sm btn-block btn-danger text-white fw-bold"
-                                    onclick="return confirm('Are you sure you want to permanently delete the data?')">
-                                    DELETE</button>
-                                </form>
-                            </div>
-                        </td>
-                        </td>
+                        <th class="col-md-1 align-middle">ID</th>
+                        <th class="col-md-1 align-middle">Type</th>
+                        <th class="col-md-2 align-middle">Topic</th>
+                        <th class="col-md-3 align-middle">Title</th>
+                        <th class="col-md-2 align-middle">Submitted By</th>
+                        <th class="col-md-1 align-middle">Priority</th>
+                        <th class="col-md-2 align-middle">Action</th>
                     </tr>
-                    @php($i = $i + 1)
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-</div>
-
-<h2 class="fw-bold text-center mt-4">Resolved</h2>
-<div class="container mt-4">
-    <div class="card p-4 bg-light">
-        <table id="myTable2" class="table table-striped bg-light">
-            <thead>
-                <tr class="">
-                    <th class="col-md-1 align-middle">ID</th>
-                    <th class="col-md-2 align-middle">Type</th>
-                    <th class="col-md-2 align-middle">Topic</th>
-                    <th class="col-md-3 align-middle">Title</th>
-                    <th class="col-md-2 align-middle">Submitted By</th>
-                    <th class="col-md-2 align-middle">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @php($i = 1)
-                @foreach ($submissions as $submission)
-                @if ($submission->ticket)
-                    @if ($submission->ticket->status == "Resolved")
+                </thead>
+                <tbody>
+                    @php($i = 1)
+                    @foreach ($tickets as $ticket)
                         <tr class="">
-                            <td class="align-middle fw-bold">{{ $submission->id }}</td>
+                            <td class="align-middle fw-bold">{{ $ticket->id }}</td>
                             <td class="align-middle">
-                                {{ $submission->type }}
+                                {{ $ticket->submission->type }}
                             </td>
                             <td class="align-middle">
-                                {{ $submission->topic }}
+                                {{ $ticket->submission->topic }}
                             </td>
-                            <td class="align-middle">{{ $submission->title }}</td>
-                            <td class="align-middle">{{ $submission->user->name }}</td>
+                            <td class="align-middle">{{ $ticket->submission->title }}</td>
+                            <td class="align-middle">{{ $ticket->submission->user->name }}</td>
+                            <td class="align-middle @if ($ticket->priority == 'LOW')
+                                bg-info
+                                @elseif ($ticket->priority == 'MEDIUM')
+                                bg-warning
+                                @elseif ($ticket->priority == 'HIGH')
+                                bg-danger
+                                @else
+                                bg-success
+                            @endif">{{ $ticket->priority }}</td>
                             <td class="align-middle">
                                 <div class="d-flex justify-content-center">
-                                    <a class="btn btn-sm btn-info text-dark fw-bold me-2" target="_blank" href="/storage/images/submissions/{{ $submission->image }}">Screenshot</a>
+                                    <a class="btn btn-sm btn-warning text-dark fw-bold me-2" data-bs-toggle="modal" data-bs-target="#assign{{$ticket->id}}">Update Status</a>
+                                    <form action="{{ route('submissions.destroy', $ticket->id) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="btn btn-sm btn-block btn-danger text-white fw-bold"
+                                        onclick="return confirm('Are you sure you want to permanently delete the data?')">
+                                        DELETE</button>
+                                    </form>
                                 </div>
                             </td>
                             </td>
                         </tr>
                         @php($i = $i + 1)
-                    @endif
                     @endforeach
                 </tbody>
             </table>
