@@ -53,7 +53,7 @@
 <h2 class="fw-bold text-center mt-4">Tickets</h2>
 <div class="container mt-4">
     <div class="card p-4 bg-light">
-        <table id="myTable" class="table table-striped bg-light">
+        <table id="myTable2" class="table table-striped bg-light">
             <thead>
                 <tr class="">
                     <th class="col-md-1 align-middle">ID</th>
@@ -110,7 +110,7 @@
 <h2 class="fw-bold text-center mt-4">Resolved</h2>
 <div class="container mt-4">
     <div class="card p-4 bg-light">
-        <table id="myTable2" class="table table-striped bg-light">
+        <table id="myTable3" class="table table-striped bg-light">
             <thead>
                 <tr class="">
                     <th class="col-md-1 align-middle">ID</th>
@@ -145,7 +145,8 @@
                         </tr>
                         @php($i = $i + 1)
                     @endif
-                    @endforeach
+                @endif
+                @endforeach
                 </tbody>
             </table>
         </div>
