@@ -10,10 +10,15 @@ class DashboardController extends Controller
 {
     public function index(){
         if (auth()->user()->type == 'USER'){
+            
             return view('dashboards.user');
+
         } else if (auth()->user()->type == 'STAFF'){
+
             return view('dashboards.staff');
+
         } else{
+
             return view('dashboards.admin');
         }
     }

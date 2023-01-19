@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\NotifyAdmin;
 use App\Mail\NotifyStaff;
 use App\Mail\NotifyUser;
-use Illuminate\Foundation\Auth\User as AuthUser;
 
 class TicketController extends Controller
 {
@@ -48,12 +47,13 @@ class TicketController extends Controller
             'priority' => $request->priority,
         ]);
         
-        $staff = User::where('user_id', $id)->get()->first();
+        $staffid = $request->user_id;
+        $staff = User::where('id', $staffid)->get()->first();
         $mail = $staff->email;
 
         Mail::to($mail)->send(new NotifyStaff());
 
-        return redirect()->route('tickets.index');
+        return redirect()->route('submissions.index');
     }
 
      public function updateStatus(Request $request, $id)
@@ -71,7 +71,7 @@ class TicketController extends Controller
         if($request->status == "Resolved"){
             $mail = $ticket->submission->user->email;
             Mail::to($mail)->send(new NotifyUser());
-        } elseif ($request->statis == "In Review"){
+        } elseif ($request->status == "In Review"){
             $type = "ADMIN";
             $admin = User::where('type', $type)->get()->first();
             $mail = $admin->email;
