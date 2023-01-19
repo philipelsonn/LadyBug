@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\NotifyAdmin;
 use App\Mail\NotifyStaff;
 use App\Mail\NotifyUser;
-use Illuminate\Foundation\Auth\User as AuthUser;
 
 class TicketController extends Controller
 {
@@ -41,19 +40,18 @@ class TicketController extends Controller
         ]);
 
         $submission = Submission::where('id', $id)->get()->first();
-        
+    
+        $staff = User::where('id', $request->user_id)->get()->first();
+        $mail = $staff->email;
+        Mail::to($mail)->send(new NotifyStaff());
+
         Ticket::create([
             'submission_id' => $submission->id,
             'user_id' => $request->user_id,
             'priority' => $request->priority,
         ]);
-        
-        $staff = User::where('user_id', $id)->get()->first();
-        $mail = $staff->email;
 
-        Mail::to($mail)->send(new NotifyStaff());
-
-        return redirect()->route('tickets.index');
+        return redirect()->route('dashboard');
     }
 
      public function updateStatus(Request $request, $id)
@@ -71,7 +69,7 @@ class TicketController extends Controller
         if($request->status == "Resolved"){
             $mail = $ticket->submission->user->email;
             Mail::to($mail)->send(new NotifyUser());
-        } elseif ($request->statis == "In Review"){
+        } elseif ($request->status == "In Review"){
             $type = "ADMIN";
             $admin = User::where('type', $type)->get()->first();
             $mail = $admin->email;
@@ -79,7 +77,7 @@ class TicketController extends Controller
         }
 
 
-        return redirect()->route('tickets.index');
+        return redirect()->route('dashboard');
     }
 
     // public function edit($id)
@@ -106,6 +104,6 @@ class TicketController extends Controller
     {
         $ticket->delete();
 
-        return redirect()->route('tickets.index');
+        return redirect()->route('dasboard');
     }
 }

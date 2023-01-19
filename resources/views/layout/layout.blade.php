@@ -56,6 +56,17 @@
         $(document).ready( function () {
             $('#myTable').DataTable();
         } );
+        $(document).ready( function () {
+            $('#myTable2').DataTable();
+        } );
+        $(document).ready( function () {
+            $('#myTable3').DataTable();
+        } );
     </script>
 </body>
+@auth
+<footer class="d-flex justify-content-center mt-auto">
+    <p class="text-black p-2">&#169 2023 Copyright. All Rights Reserved</p>
+</footer>
+@endauth
 </html>

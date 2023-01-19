@@ -17,4 +17,9 @@ class Submission extends Model
     {
         return $this->belongsTo('App\Models\User', 'submitted_by', 'id');
     }
+
+    public function ticket()
+    {
+        return $this->belongsTo('App\Models\Ticket', 'ticket_id', 'id');
+    }
 }
